@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aviamastersgame.com/sitemap.xml
+Sitemap: https://towerrushgame.com/sitemap.xml
