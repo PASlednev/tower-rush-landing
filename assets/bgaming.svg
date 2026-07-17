@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="34" viewBox="0 0 150 34" fill="none" aria-hidden="true">
+  <g transform="translate(2,4)">
+    <rect x="0" y="0" width="26" height="26" rx="7" fill="#0EA5E9"/>
+    <path d="M6 20 L13 6 L20 20 Z" fill="#0A141E"/>
+    <circle cx="13" cy="16.5" r="2.4" fill="#FFC01E"/>
+  </g>
+  <text x="36" y="23" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" letter-spacing="0.5" fill="#EAF4FB">BGaming</text>
+</svg>
