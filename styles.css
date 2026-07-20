@@ -497,8 +497,8 @@ iframe {
 .hero__plane {
   position: absolute;
   top: 9%;
-  right: 1.5%;
-  width: clamp(200px, 26vw, 23rem);
+  right: 10%;
+  width: clamp(250px, 26vw, 33rem);
   height: auto;
   opacity: 0.9;
   filter: drop-shadow(0 14px 30px rgba(0, 0, 0, 0.55));
