@@ -1532,6 +1532,28 @@ iframe {
   }
 }
 
+.footer__badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem 2.5rem;
+  width: 100%;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(143, 109, 255, 0.08);
+}
+.footer__badge {
+  display: block;
+  height: 40px;
+  width: auto;
+  opacity: 0.85;
+  transition: opacity 0.25s ease;
+}
+a:hover > .footer__badge,
+a:focus-visible > .footer__badge {
+  opacity: 1;
+}
+
 .footer__bottom {
   width: 100%;
   display: flex;
