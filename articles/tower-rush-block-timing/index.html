@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Tower Rush Block Timing: When to Bank the Run</title>
+  <meta name="description" content="How risk per block changes as a Tower Rush run gets taller, which heights most runs actually reach, and a banking rule that keeps a session under control." />
+  <meta name="author" content="Ryan Murton" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <link rel="canonical" href="https://towerrushstrategy.com/articles/tower-rush-block-timing/" />
+  <link rel="alternate" hreflang="en" href="https://towerrushstrategy.com/articles/tower-rush-block-timing/" />
+  <link rel="alternate" hreflang="x-default" href="https://towerrushstrategy.com/articles/tower-rush-block-timing/" />
+  <meta name="theme-color" content="#100e1a" />
+  <link rel="icon" href="../../assets/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&amp;family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="../../article.css" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://towerrushstrategy.com/articles/tower-rush-block-timing/" />
+  <meta property="og:title" content="Tower Rush Block Timing — When to Bank" />
+  <meta property="og:description" content="The risk curve per block, and the heights where most runs actually end." />
+  <meta property="og:image" content="https://towerrushstrategy.com/assets/articles/tower-rush-block-stack-multiplier-1200.webp" />
+  <meta property="og:image:alt" content="Tower Rush run in progress with several blocks stacked and the multiplier rising" />
+  <meta property="og:site_name" content="Tower Rush Game" />
+  <meta property="article:published_time" content="2026-08-14T09:00:00.000Z" />
+  <meta property="article:modified_time" content="2026-08-14T09:00:00.000Z" />
+  <meta property="article:section" content="Strategy" />
+  <meta property="article:tag" content="cash-out" />
+  <meta property="article:tag" content="bankroll" />
+  <meta property="article:tag" content="volatility" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Tower Rush Block Timing — When to Bank" />
+  <meta name="twitter:description" content="The risk curve per block, and the heights where most runs actually end." />
+  <meta name="twitter:image" content="https://towerrushstrategy.com/assets/articles/tower-rush-block-stack-multiplier-1200.webp" />
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Tower Rush Block Timing: Where Most Runs Actually End",
+  "description": "How risk per block changes as a Tower Rush run gets taller, which heights most runs actually reach, and a banking rule that keeps a session under control.",
+  "image": [
+    "https://towerrushstrategy.com/assets/articles/tower-rush-block-stack-multiplier-1200.webp"
+  ],
+  "datePublished": "2026-08-14T09:00:00.000Z",
+  "dateModified": "2026-08-14T09:00:00.000Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://towerrushstrategy.com/articles/tower-rush-block-timing/"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Ryan Murton",
+    "jobTitle": "Crash games analyst",
+    "sameAs": [
+      "https://www.linkedin.com/in/ryan-murton",
+      "https://t.me/chickenroadstrategy"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Tower Rush Game"
+  },
+  "articleSection": "Strategy",
+  "keywords": "cash-out, bankroll, volatility"
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://towerrushstrategy.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Articles",
+      "item": "https://towerrushstrategy.com/articles/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Tower Rush Block Timing: Where Most Runs Actually End",
+      "item": "https://towerrushstrategy.com/articles/tower-rush-block-timing/"
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is there an optimal number of blocks in Tower Rush?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The house edge is the same at every height. A fixed banking point only removes the in-run decision, which is where most losses come from."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can a previous collapse tell you anything about the next run?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Each round is generated independently and can be verified afterwards through the provably-fair seed check."
+      }
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <header class="nav" id="site-header">
+    <div class="nav__inner">
+      <a class="logo" href="../../" aria-label="Tower Rush Game">
+        <img class="logo__img" src="../../assets/logo-tower-rush.webp" alt="Tower Rush" width="360" height="143" />
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="../../tower-rush-demo/">Free Demo</a>
+        <a href="../../is-tower-rush-legit/">Is It Legit?</a>
+        <a href="../../tower-rush-casino/">Where to Play</a>
+        <a href="../../tower-rush-review/">Review</a>
+        <a href="../../articles/" aria-current="page">Articles</a>
+      </nav>
+      <div class="nav__actions">
+        <a href="https://dig-board.com/4rBV3d55?t1=3&amp;t7=multi18&amp;t5=1167" target="_blank" rel="noopener nofollow sponsored" class="btn btn--play nav__cta">Play Now</a>
+        <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" hidden>
+      <a href="../../tower-rush-demo/">Free Demo</a>
+      <a href="../../is-tower-rush-legit/">Is It Legit?</a>
+      <a href="../../tower-rush-casino/">Where to Play</a>
+      <a href="../../tower-rush-review/">Review</a>
+      <a href="../../articles/" aria-current="page">Articles</a>
+      <a href="https://dig-board.com/4rBV3d55?t1=3&amp;t7=multi18&amp;t5=1167" target="_blank" rel="noopener nofollow sponsored" class="btn btn--play mobile-menu__cta">Play Now</a>
+    </div>
+  </header>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="breadcrumb__inner">
+      <a href="../../">Home</a> / <a href="../">Articles</a> / <span aria-current="page">Tower Rush Block Timing: Where Most Runs Actually End</span>
+    </div>
+  </nav>
+
+  <main class="spoke">
+    <article class="art">
+      <header class="spoke-hero art-hero">
+        <div class="spoke-hero__inner">
+          <p class="spoke-hero__kicker">Strategy</p>
+          <h1>Tower Rush Block Timing: Where Most Runs Actually End</h1>
+          <p class="spoke-hero__sub">The tower does not collapse at random heights. Here is how the risk per block changes as you build, and the range where most sessions quietly bleed out.</p>
+          <div class="art-meta">
+            <span class="art-meta__author">By <strong>Ryan Murton</strong> · Crash games analyst</span>
+            <time datetime="2026-08-14T09:00:00.000Z">14 August 2026</time>
+            
+          </div>
+          <p class="age-badge">🔞 18+ only · Real-money gambling</p>
+        </div>
+      </header>
+
+      <figure class="art-figure">
+        <img src="../../assets/articles/tower-rush-block-stack-multiplier-1200.webp" alt="Tower Rush run in progress with several blocks stacked and the multiplier rising" width="1200" fetchpriority="high" decoding="async" />
+        <figcaption>Each block adds less payout and more risk than the one below it.</figcaption>
+      </figure>
+
+      <div class="spoke-body"><div class="spoke-body__inner art-body">
+<p>Tower Rush gives you one decision, repeated: place another block or bank what you have. Every block raises the payout and the chance the run ends. The interesting part is that those two curves do not move at the same speed.</p><h2>How risk stacks up</h2><p>The first blocks are cheap — the multiplier moves a little and the failure chance stays low. Further up, each block adds a smaller proportional gain against a larger proportional risk. That crossover is where a session is won or lost.</p><h3>Three phases of a run</h3><ul><li><p><strong>Early blocks</strong> — low risk, low reward, almost free to take.</p></li><li><p><strong>Middle</strong> — the payoff is meaningful and the risk is still tolerable.</p></li><li><p><strong>Top</strong> — small gains, sharply rising failure chance, and the reason most runs end with nothing.</p></li></ul><h2>Where runs finish</h2><div class="table-wrap"><table class="op-table"><tbody><tr><th><p>Blocks placed</p></th><th><p>Typical multiplier</p></th><th><p>Runs reaching it</p></th></tr><tr><td><p>1 – 3</p></td><td><p>Up to ~1.5×</p></td><td><p>Most</p></td></tr><tr><td><p>4 – 7</p></td><td><p>~2× – 4×</p></td><td><p>Roughly half</p></td></tr><tr><td><p>8+</p></td><td><p>5×+</p></td><td><p>Few</p></td></tr></tbody></table></div><blockquote><p>Banking at a fixed height is not a strategy that beats the game. It is a rule that stops one bad decision from turning into six.</p></blockquote><h2>A rule set worth using</h2><ol><li><p>Choose a block count before the run and bank there regardless of how it looks.</p></li><li><p>Do not raise the target after a loss — that is the most expensive habit in the game.</p></li><li><p>Size the stake for a streak of losses, not for the win you are picturing.</p></li><li><p>Set a session loss limit in money and honour it.</p></li></ol><p>The mechanics cost nothing to learn — try them in the <a href="/tower-rush-demo/">free demo</a> first.</p>
+      </div></div>
+
+      <div class="art-tags"><div class="art-tags__inner">
+        <span class="art-tag">#cash-out</span>
+        <span class="art-tag">#bankroll</span>
+        <span class="art-tag">#volatility</span>
+      </div></div>
+
+      <aside class="art-author"><div class="art-author__inner">
+        <div class="author-card">
+          <img class="author-card__avatar" src="../../assets/articles/author-ryan-240.webp" alt="Ryan Murton" width="120" height="120" loading="lazy" decoding="async" />
+          <div class="author-card__text">
+            <p class="author-card__name">Ryan Murton</p>
+            <p class="author-card__role">Crash games analyst</p>
+            <p class="author-card__bio">Ryan has covered crash and instant-win titles since 2019, testing RTP claims and cash-out mechanics across licensed operators. He writes the Chicken Road guides and keeps the payout data current.</p>
+            <a class="author-card__link" href="https://www.linkedin.com/in/ryan-murton" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="author-card__link" href="https://t.me/chickenroadstrategy" target="_blank" rel="noopener">Telegram</a>
+          </div>
+        </div>
+      </div></aside>
+
+      <aside class="related"><div class="related__inner">
+        <h2>Related reading</h2>
+        <div class="related__grid">
+          <a href="../tower-rush-provably-fair-check/"><span aria-hidden="true">&rarr;</span> How to Verify a Tower Rush Round: The Provably-Fair Check</a>
+        </div>
+      </div></aside>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <nav class="footer__quicklinks" aria-label="Footer"><p class="footer__links"><a href="../../tower-rush-demo/">Free Demo</a> · <a href="../../is-tower-rush-legit/">Is It Legit?</a> · <a href="../../tower-rush-casino/">Where to Play</a> · <a href="../../tower-rush-review/">Review</a> · <a href="../../articles/">Articles</a></p></nav>
+      <div class="footer__bottom">
+        <p class="footer__links">© 2026 Tower Rush Game. All rights reserved. · Privacy · Terms · Support</p>
+        <p class="footer__right">🔒 SSL Secured · Certified RNG · 18+</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="to-top" id="to-top" type="button" aria-label="Scroll back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </button>
+
+  <script src="../../analytics.js"></script>
+  <script src="../../spoke.js"></script>
+</body>
+</html>

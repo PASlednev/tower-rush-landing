@@ -5,3 +5,6 @@ Thumbs.db
 *~
 .vscode/
 .idea/
+
+# Сборка статей: статик-токен Directus
+build/.env

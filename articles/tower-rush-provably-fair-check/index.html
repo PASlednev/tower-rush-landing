@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Tower Rush Provably Fair: How to Verify a Round Yourself</title>
+  <meta name="description" content="Step-by-step provably-fair verification for Tower Rush: server seed, client seed, hash comparison — what it proves about a round and what it does not." />
+  <meta name="author" content="Ryan Murton" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <link rel="canonical" href="https://towerrushstrategy.com/articles/tower-rush-provably-fair-check/" />
+  <link rel="alternate" hreflang="en" href="https://towerrushstrategy.com/articles/tower-rush-provably-fair-check/" />
+  <link rel="alternate" hreflang="x-default" href="https://towerrushstrategy.com/articles/tower-rush-provably-fair-check/" />
+  <meta name="theme-color" content="#100e1a" />
+  <link rel="icon" href="../../assets/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&amp;family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="../../article.css" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://towerrushstrategy.com/articles/tower-rush-provably-fair-check/" />
+  <meta property="og:title" content="Verifying a Tower Rush Round in Two Minutes" />
+  <meta property="og:description" content="Server seed, client seed, hash check — and the three things provable fairness does not cover." />
+  <meta property="og:image" content="https://towerrushstrategy.com/assets/articles/tower-rush-round-history-seeds-1200.webp" />
+  <meta property="og:image:alt" content="Tower Rush round history panel where the server seed is revealed after the round" />
+  <meta property="og:site_name" content="Tower Rush Game" />
+  <meta property="article:published_time" content="2026-08-20T09:00:00.000Z" />
+  <meta property="article:modified_time" content="2026-08-20T09:00:00.000Z" />
+  <meta property="article:section" content="Strategy" />
+  <meta property="article:tag" content="provably fair" />
+  <meta property="article:tag" content="scams" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Verifying a Tower Rush Round in Two Minutes" />
+  <meta name="twitter:description" content="Server seed, client seed, hash check — and the three things provable fairness does not cover." />
+  <meta name="twitter:image" content="https://towerrushstrategy.com/assets/articles/tower-rush-round-history-seeds-1200.webp" />
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How to Verify a Tower Rush Round: The Provably-Fair Check",
+  "description": "Step-by-step provably-fair verification for Tower Rush: server seed, client seed, hash comparison — what it proves about a round and what it does not.",
+  "image": [
+    "https://towerrushstrategy.com/assets/articles/tower-rush-round-history-seeds-1200.webp"
+  ],
+  "datePublished": "2026-08-20T09:00:00.000Z",
+  "dateModified": "2026-08-20T09:00:00.000Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://towerrushstrategy.com/articles/tower-rush-provably-fair-check/"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Ryan Murton",
+    "jobTitle": "Crash games analyst",
+    "sameAs": [
+      "https://www.linkedin.com/in/ryan-murton",
+      "https://t.me/chickenroadstrategy"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Tower Rush Game"
+  },
+  "articleSection": "Strategy",
+  "keywords": "provably fair, scams"
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://towerrushstrategy.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Articles",
+      "item": "https://towerrushstrategy.com/articles/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "How to Verify a Tower Rush Round: The Provably-Fair Check",
+      "item": "https://towerrushstrategy.com/articles/tower-rush-provably-fair-check/"
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <header class="nav" id="site-header">
+    <div class="nav__inner">
+      <a class="logo" href="../../" aria-label="Tower Rush Game">
+        <img class="logo__img" src="../../assets/logo-tower-rush.webp" alt="Tower Rush" width="360" height="143" />
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="../../tower-rush-demo/">Free Demo</a>
+        <a href="../../is-tower-rush-legit/">Is It Legit?</a>
+        <a href="../../tower-rush-casino/">Where to Play</a>
+        <a href="../../tower-rush-review/">Review</a>
+        <a href="../../articles/" aria-current="page">Articles</a>
+      </nav>
+      <div class="nav__actions">
+        <a href="https://dig-board.com/4rBV3d55?t1=3&amp;t7=multi18&amp;t5=1167" target="_blank" rel="noopener nofollow sponsored" class="btn btn--play nav__cta">Play Now</a>
+        <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" hidden>
+      <a href="../../tower-rush-demo/">Free Demo</a>
+      <a href="../../is-tower-rush-legit/">Is It Legit?</a>
+      <a href="../../tower-rush-casino/">Where to Play</a>
+      <a href="../../tower-rush-review/">Review</a>
+      <a href="../../articles/" aria-current="page">Articles</a>
+      <a href="https://dig-board.com/4rBV3d55?t1=3&amp;t7=multi18&amp;t5=1167" target="_blank" rel="noopener nofollow sponsored" class="btn btn--play mobile-menu__cta">Play Now</a>
+    </div>
+  </header>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="breadcrumb__inner">
+      <a href="../../">Home</a> / <a href="../">Articles</a> / <span aria-current="page">How to Verify a Tower Rush Round: The Provably-Fair Check</span>
+    </div>
+  </nav>
+
+  <main class="spoke">
+    <article class="art">
+      <header class="spoke-hero art-hero">
+        <div class="spoke-hero__inner">
+          <p class="spoke-hero__kicker">Strategy</p>
+          <h1>How to Verify a Tower Rush Round: The Provably-Fair Check</h1>
+          <p class="spoke-hero__sub">Galaxsys publishes the seeds behind every round. Verifying one takes about two minutes and settles the only question worth asking about a crash game.</p>
+          <div class="art-meta">
+            <span class="art-meta__author">By <strong>Ryan Murton</strong> · Crash games analyst</span>
+            <time datetime="2026-08-20T09:00:00.000Z">20 August 2026</time>
+            
+          </div>
+          <p class="age-badge">🔞 18+ only · Real-money gambling</p>
+        </div>
+      </header>
+
+      <figure class="art-figure">
+        <img src="../../assets/articles/tower-rush-round-history-seeds-1200.webp" alt="Tower Rush round history panel where the server seed is revealed after the round" width="1200" fetchpriority="high" decoding="async" />
+        <figcaption>The revealed seed must hash to the value shown before the round.</figcaption>
+      </figure>
+
+      <div class="spoke-body"><div class="spoke-body__inner art-body">
+<p>Provably fair is a claim until you check it. Tower Rush exposes the seeds that generate each round, which means the outcome can be reproduced afterwards by anyone — including you, on your own machine, without trusting the operator.</p><h2>What the system guarantees</h2><p>Before a round, the server commits to a hashed seed. You supply a client seed. After the round, the server reveals its seed and you confirm that it hashes to the value published beforehand. If it does, the result could not have been changed once betting started.</p><h3>What it does not guarantee</h3><ul><li><p><strong>Not a fair price.</strong> The house edge is still there and is unaffected by verification.</p></li><li><p><strong>Not operator honesty elsewhere.</strong> Payouts, bonus terms and withdrawals are separate questions.</p></li><li><p><strong>Not your odds.</strong> Verification proves the round was not tampered with, nothing more.</p></li></ul><h2>The check, step by step</h2><div class="table-wrap"><table class="op-table"><tbody><tr><th><p>Step</p></th><th><p>Where</p></th><th><p>What you compare</p></th></tr><tr><td><p>Copy the hashed server seed</p></td><td><p>Before the round</p></td><td><p>Store it yourself</p></td></tr><tr><td><p>Set a client seed</p></td><td><p>Game settings</p></td><td><p>Any value you choose</p></td></tr><tr><td><p>Reveal after the round</p></td><td><p>Round history</p></td><td><p>Hash it, compare with step one</p></td></tr></tbody></table></div><blockquote><p>If the revealed seed does not hash to the value published before the round, stop playing on that operator and take screenshots.</p></blockquote><h2>When to bother</h2><ol><li><p>On a new operator, before depositing anything meaningful.</p></li><li><p>After a run of results that feels wrong — verify instead of guessing.</p></li><li><p>Whenever the site shows an RTP different from the one on the Galaxsys game page.</p></li><li><p>Never as a way to predict the next round. It cannot.</p></li></ol><p>Operator checks beyond the seed are covered in <a href="/is-tower-rush-legit/">the legitimacy guide</a>.</p>
+      </div></div>
+
+      <div class="art-tags"><div class="art-tags__inner">
+        <span class="art-tag">#provably fair</span>
+        <span class="art-tag">#scams</span>
+      </div></div>
+
+      <aside class="art-author"><div class="art-author__inner">
+        <div class="author-card">
+          <img class="author-card__avatar" src="../../assets/articles/author-ryan-240.webp" alt="Ryan Murton" width="120" height="120" loading="lazy" decoding="async" />
+          <div class="author-card__text">
+            <p class="author-card__name">Ryan Murton</p>
+            <p class="author-card__role">Crash games analyst</p>
+            <p class="author-card__bio">Ryan has covered crash and instant-win titles since 2019, testing RTP claims and cash-out mechanics across licensed operators. He writes the Chicken Road guides and keeps the payout data current.</p>
+            <a class="author-card__link" href="https://www.linkedin.com/in/ryan-murton" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="author-card__link" href="https://t.me/chickenroadstrategy" target="_blank" rel="noopener">Telegram</a>
+          </div>
+        </div>
+      </div></aside>
+
+      <aside class="related"><div class="related__inner">
+        <h2>Related reading</h2>
+        <div class="related__grid">
+          <a href="../tower-rush-block-timing/"><span aria-hidden="true">&rarr;</span> Tower Rush Block Timing: Where Most Runs Actually End</a>
+        </div>
+      </div></aside>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <nav class="footer__quicklinks" aria-label="Footer"><p class="footer__links"><a href="../../tower-rush-demo/">Free Demo</a> · <a href="../../is-tower-rush-legit/">Is It Legit?</a> · <a href="../../tower-rush-casino/">Where to Play</a> · <a href="../../tower-rush-review/">Review</a> · <a href="../../articles/">Articles</a></p></nav>
+      <div class="footer__bottom">
+        <p class="footer__links">© 2026 Tower Rush Game. All rights reserved. · Privacy · Terms · Support</p>
+        <p class="footer__right">🔒 SSL Secured · Certified RNG · 18+</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="to-top" id="to-top" type="button" aria-label="Scroll back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </button>
+
+  <script src="../../analytics.js"></script>
+  <script src="../../spoke.js"></script>
+</body>
+</html>
